@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/neelasantosh/themoviedb/precache-manifest.3b92293f033a11ea29b8772e4b47ffda.js"
+  "/themoviedb/precache-manifest.71ccfce87df15cb23bb26eab51033797.js"
 );
 
 workbox.clientsClaim();
@@ -28,7 +28,7 @@ self.__precacheManifest = [].concat(self.__precacheManifest || []);
 workbox.precaching.suppressWarnings();
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 
-workbox.routing.registerNavigationRoute("/neelasantosh/themoviedb/index.html", {
+workbox.routing.registerNavigationRoute("/themoviedb/index.html", {
   
   blacklist: [/^\/_/,/\/[^\/]+\.[^\/]+$/],
 });
