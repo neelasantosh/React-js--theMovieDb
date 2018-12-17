@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
+import NotAvailable from '../assets/images/Poster_not_available.jpg'
 import _ from 'lodash';
 var numeral = require('numeral');
 
@@ -33,6 +34,12 @@ class Card extends Component{
 
   }
 
+  componentDidUpdate() {
+    let backdropIMG = 'https://image.tmdb.org/t/p/original' + this.state.moviedata.backdrop_path;
+    document.body.style.backgroundImage = 'url(' + backdropIMG + ')';
+  }
+
+
   componentWillMount(){
     this.fetchMovieID(this.props.movieidnum)
   }
@@ -63,20 +70,20 @@ class Card extends Component{
           <div className="moviebody">
             <div className="card-body">
               <h1 className="card-title">{this.state.moviedata.original_title}</h1>
-              <h4 className="card-text headertext">{this.state.moviedata.tagline}</h4>
+              <h4 className="card-text headertext">{this.state.moviedata.tagline!==undefined ? this.state.moviedata.tagline : 'NA'}</h4>
               <p className="card-text">{this.state.moviedata.overview}</p>
             </div>
 
             <div className="card-body">
-              <h4 className="card-text headertext">Genere : {generesArr.join(' , ')}</h4>
-              <p className="card-text headertext">Production Companies : {productionArr.join(' , ')}</p>
+              <h4 className="card-text headertext">Genere : {!_.isEmpty(generesArr) ?  generesArr.join(' , ') : 'NA'}</h4>
+              <p className="card-text headertext">Production Companies : {!_.isEmpty(productionArr) ? productionArr.join(' , ') : 'NA'}</p>
             </div>
 
             <div className="row">
               <div className="col-6 col-md-6">
                 <div className="card-body">
                   <h6 className="card-text">Released Date: </h6>
-                  <h4 className="card-text headertext">{this.state.moviedata.release_date}</h4>
+                  <h4 className="card-text headertext">{this.state.moviedata.release_date!==undefined ? this.state.moviedata.release_date : 'NA'}</h4>
                 </div>
 
                 {/*<div className="card-body">
@@ -86,25 +93,25 @@ class Card extends Component{
 
                 <div className="card-body">
                   <h6 className="card-text">Box Office Collections: </h6>
-                  <h4 className="card-text headertext">{numeral(this.state.moviedata.revenue).format('($0,0)')}</h4>
+                  <h4 className="card-text headertext">{this.state.moviedata.revenue!==undefined ? numeral(this.state.moviedata.revenue).format('($0,0)') : 'NA'}</h4>
                 </div>
 
               </div>
               <div className="col-6 col-md-6">
                 <div className="card-body">
                   <h6 className="card-text">Duration: </h6>
-                  <h4 className="card-text headertext">{this.state.moviedata.runtime} mins</h4>
+                  <h4 className="card-text headertext">{this.state.moviedata.runtime!==undefined ? this.state.moviedata.runtime : 'NA'} mins</h4>
                 </div>
                 <div className="card-body">
                   <h6 className="card-text">Review Ratings: </h6>
-                  <h4 className="card-text headertext">{this.state.moviedata.vote_average} / 10</h4>
+                  <h4 className="card-text headertext">{this.state.moviedata.vote_average!==undefined ? this.state.moviedata.vote_average : 'NA'} / 10</h4>
                 </div>
               </div>
             </div>
           </div>
         </div>
         <div className="col-12 order-1 order-lg-2 col-md-4 imagecontent">
-          <img className="posterimage" src={posterPath} />
+          {this.state.moviedata.poster_path!==undefined ? <img className="posterimage" src={posterPath} alt="poster image"/> : <img src={NotAvailable}/>}
         </div>
       </div>
     )
