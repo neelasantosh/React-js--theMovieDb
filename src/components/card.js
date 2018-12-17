@@ -111,7 +111,7 @@ class Card extends Component{
           </div>
         </div>
         <div className="col-12 order-1 order-lg-2 col-md-4 imagecontent">
-          {this.state.moviedata.poster_path!==undefined ? <img className="posterimage" src={posterPath} alt="poster image"/> : <img src={NotAvailable}/>}
+          {this.state.moviedata.poster_path!=null ? <img className="posterimage" src={posterPath} alt="poster image"/> : <img src={NotAvailable}/>}
         </div>
       </div>
     )
